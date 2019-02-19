@@ -5,23 +5,23 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField]
-	[Tooltip("Animator componenet attached to the player")]
 	private Animator anim;	// Animator state machine object
 
 	[SerializeField]
-	[Tooltip("Sprite renderer componenet attached to the player")]
 	private SpriteRenderer sRenderer;   // Animator state machine object
 
 	[SerializeField]
-	[Tooltip("Rigid body componenet attached to the player")]
 	private Rigidbody2D rb;   // Rigid body 2D component
 
-	[Tooltip("Arrow which will point towards the players end pos")]
+
+	/* - - - - PUBLIC - - - - */
 	public GameObject arrowPrefab; // Arrow prefab object
 
 
+	/* - - - - PRIVATE - - - - */
 	private GameObject directionArrow;	// Arrow which will be used by the player
 	private float speedMulti = 4.5f;    // Multiplies the direction axis
+
 
 	private void Start()
 	{
@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
 		else
 			directionArrow.SetActive(false);
 	}
+
 
 	private void PlaceArrow(Vector3 endPos)
 	{
