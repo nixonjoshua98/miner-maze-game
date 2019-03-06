@@ -5,78 +5,64 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField]
-	private Animator anim;	// Animator state machine object
+	private Animator anim;				// Animator state machine object
 
 	[SerializeField]
 	private SpriteRenderer sRenderer;   // Animator state machine object
 
 	[SerializeField]
-	private Rigidbody2D rb;   // Rigid body 2D component
+	private Rigidbody2D rb;             // Rigid body 2D component
 
 
-	/* - - - - PUBLIC - - - - */
-	public GameObject arrowPrefab; // Arrow prefab object
-
-
-	/* - - - - PRIVATE - - - - */
-	private GameObject directionArrow;	// Arrow which will be used by the player
-	private float speedMulti = 4.5f;    // Multiplies the direction axis
-
-
-	private void Start()
-	{
-		directionArrow = Instantiate(arrowPrefab, transform.position, Quaternion.identity) as GameObject;
-	}
+	private float speedMulti = 3.5f;    // Multiplies the direction axis
 
 
 	private void Update()
 	{
-		bool mining = Input.GetKey("space");
+		bool spaceHeldDown = Input.GetKey("space");
 
-		anim.SetBool("Mining", mining);
-		anim.SetBool("Idle", !mining);
-
-		MovePlayer(mining);
+		if (spaceHeldDown)
+		{
+			StartMining();
+		}
+		else
+		{
+			StopMining();
+			MovePlayer();
+		}
 	}
 
 
-	private void MovePlayer(bool currentMining)
+	private void MovePlayer()
 	{
 		float vert = Input.GetAxis("Vertical") * Time.deltaTime;
 		float hori = Input.GetAxis("Horizontal") * Time.deltaTime;
-		Vector3 endPos = transform.position + (new Vector3(hori, vert, 0) * speedMulti);
 
-		// Not mining
-		if (!currentMining)
-		{
-			// Place directional arrow
-			PlaceArrow(endPos);
+		// Player movement direction
+		Vector3 dir = new Vector3(hori, vert, 0);
 
-			// Flip to face direction
-			sRenderer.flipX = (hori != 0.0f ? hori < 0.0f : sRenderer.flipX);
+		// Debugging...
+		Debug.DrawRay(transform.position, dir.normalized, Color.green);
 
-			// Move player
-			rb.MovePosition(Vector2.Lerp(transform.position, endPos, 1.0f));
-		}
+		// Flip to face direction
+		sRenderer.flipX = (hori != 0.0f ? hori < 0.0f : sRenderer.flipX); 
 
-		// Currently mining
-		else
-			directionArrow.SetActive(false);
+		// Move player
+		rb.MovePosition(transform.position + (dir * speedMulti));
 	}
 
 
-	private void PlaceArrow(Vector3 endPos)
+	private void StartMining()
 	{
-		// Arrow positions ( / 1.5f: Brings arrow closer to the player)
-		Vector3 newArrowPos = transform.position + ((endPos - transform.position).normalized / 1.5f);
-		Vector3 lookAtDir = endPos - transform.position;
-		float angle = Mathf.Atan2(lookAtDir.y, lookAtDir.x) * Mathf.Rad2Deg;
+		anim.SetBool("Idle", false);
+		anim.SetBool("Mining", true);
+	}
 
-		// If player is not standing still
-		directionArrow.SetActive(newArrowPos != transform.position);
 
-		// Set arrow position and rotation
-		directionArrow.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-		directionArrow.transform.position = newArrowPos;
+
+	private void StopMining()
+	{
+		anim.SetBool("Idle", true);
+		anim.SetBool("Mining", false);
 	}
 }
