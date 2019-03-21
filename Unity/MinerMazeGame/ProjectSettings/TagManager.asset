@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - FloorTile
+  - BreakTile
+  - WallTile
+  - ExitTile
+  - Enemy
+  - HealthPotion
   layers:
   - Default
   - TransparentFX

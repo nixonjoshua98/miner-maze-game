@@ -4,25 +4,33 @@ using UnityEngine;
 
 public class MineManager : MonoBehaviour
 {
-	public Vector3 topLeftCorner;
+	public static MineManager instance = null;
+
+	/* - - - INSPECTOR - - - - */
+	[SerializeField]
+	private Vector3 topLeftCorner;
 
 	[Space]
-
 	public string mineFile;
 
-	[Space]
-
+	[Header("Tile GameObjects")]
 	public GameObject floorTile;
 	public GameObject wallTile;
 	public GameObject breakTile;
+    public GameObject exitTile;
 
-	/* - - - - - - - - - - - - - - - - - - */
+	[Space, SerializeField]
+	GameObject healthPotion;
 
+
+	/* - - - - PRIVATES - - - - */
 	private string[] mineData;
 
 
 	private void Awake()
 	{
+		instance = this;
+
 		mineData = (Resources.Load(mineFile) as TextAsset).text.Split('\n');
 	}
 
@@ -30,6 +38,8 @@ public class MineManager : MonoBehaviour
 	private void Start()
 	{
 		GenerateMine();
+
+		SpawnNewPotion();
 	}
 
 
@@ -37,7 +47,7 @@ public class MineManager : MonoBehaviour
 	{
 		Vector3 pos = topLeftCorner;
 
-		GameObject tile = new GameObject();
+		GameObject tile;
 
 		// Line by line
 		for (int i = 0; i < mineData.Length; i++)
@@ -59,6 +69,10 @@ public class MineManager : MonoBehaviour
 						tile = Instantiate(breakTile, pos, Quaternion.identity, transform);
 						break;
 
+                    case 'E':
+                        tile = Instantiate(exitTile, pos, Quaternion.identity, transform);
+                        break;
+
 				}
 
 				pos.x += 1;
@@ -69,4 +83,25 @@ public class MineManager : MonoBehaviour
 		}
 	}
 
+
+	public void SpawnNewPotion()
+	{
+		StartCoroutine(ISpawnPotion());
+	}
+
+
+	private IEnumerator ISpawnPotion()
+	{
+		yield return new WaitForSeconds(3.0f);
+
+		List<Transform> Children = new List<Transform>();
+
+		foreach (Transform child in transform)
+		{
+			if (child.CompareTag("FloorTile"))
+				Children.Add(child.transform);
+		}
+
+		GameObject potion = Instantiate(healthPotion, Children[Random.Range(0, Children.Count)].position, Quaternion.identity);
+	}
 }
