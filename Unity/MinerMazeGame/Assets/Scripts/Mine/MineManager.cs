@@ -23,6 +23,10 @@ public class MineManager : MonoBehaviour
 	GameObject healthPotion;
 
 
+	[Header("Enemy Gameobjects"), SerializeField]
+	GameObject enemyOne;
+
+
 	/* - - - - PRIVATES - - - - */
 	private string[] mineData;
 
@@ -48,6 +52,7 @@ public class MineManager : MonoBehaviour
 		Vector3 pos = topLeftCorner;
 
 		GameObject tile;
+		GameObject enemy;
 
 		// Line by line
 		for (int i = 0; i < mineData.Length; i++)
@@ -57,6 +62,7 @@ public class MineManager : MonoBehaviour
 			{
 				switch (c)
 				{
+					// Floor
 					case 'F':
 						tile = Instantiate(floorTile, pos, Quaternion.identity, transform);
 						break;
@@ -72,6 +78,19 @@ public class MineManager : MonoBehaviour
                     case 'E':
                         tile = Instantiate(exitTile, pos, Quaternion.identity, transform);
                         break;
+					
+
+						// Enemies
+					case '1':
+						tile = Instantiate(floorTile, pos, Quaternion.identity, transform);
+						enemy = Instantiate(enemyOne, pos, Quaternion.identity, transform);
+						break;
+
+
+						// Debugging
+					case 'X':
+						tile = Instantiate(floorTile, pos, Quaternion.identity, transform);
+						break;
 
 				}
 

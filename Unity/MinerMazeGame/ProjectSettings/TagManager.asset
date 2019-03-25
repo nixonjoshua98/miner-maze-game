@@ -19,11 +19,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Tiles
+  - Player
+  - WallTiles
+  - FloorTiles
+  - BreakableTiles
   - 
   - 
   - 

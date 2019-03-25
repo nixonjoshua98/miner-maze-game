@@ -63,6 +63,11 @@ public class PlayerHealth : MonoBehaviour
 			Destroy(collision.gameObject);
 			MineManager.instance.SpawnNewPotion();
 		}
+
+		else if (collision.CompareTag("Enemy"))
+		{
+			_currentHealth = Mathf.Max(0, _currentHealth - 10);
+		}
 	}
 
 

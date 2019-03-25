@@ -10,12 +10,15 @@ public class EnemyMovement : MonoBehaviour
 	private SpriteRenderer sRenderer;
 
 
-	/* - - - - INSECOTR PRIVATES - - - - */
+	/* - - - - INSPECTOR PRIVATES - - - - */
 	[SerializeField, Range(0.5f, 5.0f)]
 	private float speedMulti;
 
 	[SerializeField, Range(1, 10)]
 	private int maxMoveDistance;
+
+	[SerializeField, Range(1, 16)]
+	int visionDistance;
 
 	
 	/* - - - - PRIVATES - - - - */
@@ -57,7 +60,17 @@ public class EnemyMovement : MonoBehaviour
 
 			int distance = 1;
 
-			if (ValidPosition(target, ref distance))
+			// Enemy vision
+			if (IsFacingPlayer(ref moveTarget))
+			{
+				UpdateSprite(moveTarget - transform.position);
+				isMoving = true;
+				break;
+			}
+
+
+			// Random movement
+			else if (ValidPosition(target, ref distance))
 			{
 				UpdateSprite(target);
 				moveTarget = transform.position + (target * distance);
@@ -66,6 +79,7 @@ public class EnemyMovement : MonoBehaviour
 			}
 		}
 	}
+
 
 	private void UpdateSprite(Vector3 pos)
 	{
@@ -76,17 +90,17 @@ public class EnemyMovement : MonoBehaviour
 	}
 
 
-	private bool ValidPosition(Vector3 pos, ref int distance)
+	private bool ValidPosition(Vector3 dir, ref int distance)
 	{
 		bool foundValidPos = false;
 
 		for (int i = 1; i <= maxMoveDistance; i++)
 		{
-			RaycastHit2D hit = Physics2D.Raycast(transform.position + (pos * i), Vector3.forward);
+			RaycastHit2D hit = Physics2D.Raycast(transform.position + (dir * i), Vector3.forward, 1, LayerMask.GetMask("WallTiles", "FloorTiles", "BreakableTiles"));
 
-			if (!(hit.collider.CompareTag("WallTile") || hit.collider.CompareTag("ExitTile") || hit.collider.CompareTag("BreakTile")))
+			if (hit.collider.CompareTag("FloorTile"))
 			{
-				Debug.DrawLine(transform.position, transform.position + (pos * i), Color.green, 0.5f);
+				Debug.DrawLine(transform.position, transform.position + (dir * i), Color.green, 0.5f);
 				distance = i;
 				foundValidPos = true;
 			}
@@ -95,6 +109,33 @@ public class EnemyMovement : MonoBehaviour
 		}
 
 		return foundValidPos;
+	}
+
+
+	private bool IsFacingPlayer(ref Vector3 playerPos)
+	{
+		List<Vector3> directions = new List<Vector3>()
+		{
+			Vector3.up,
+			Vector3.right,
+			Vector3.down,
+			Vector3.left,
+		};
+
+		foreach (Vector3 dir in directions)
+		{
+			RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, visionDistance, LayerMask.GetMask("Player", "BreakableTiles", "WallTiles"));
+
+			if (hit.collider && hit.collider.CompareTag("Player"))
+			{
+				playerPos = hit.collider.transform.position;
+				Debug.DrawLine(transform.position, playerPos, Color.red, 0.5f);
+				Debug.DrawLine(transform.position, transform.position + (dir * visionDistance), Color.blue, 0.5f);
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 
