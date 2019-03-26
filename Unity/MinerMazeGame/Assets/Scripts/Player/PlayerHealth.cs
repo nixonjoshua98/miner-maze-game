@@ -27,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
 
 
     /* - - - - PUBLIC ACCESSORS - - - - */
-    public int currentHealth { get { return _currentHealth; } }
+    public int currentHealth { get { return _currentHealth; } set { _currentHealth = Mathf.Max(0, value); } }
 
 
     /* - -  - COOLDOWNS - - - - */
@@ -62,11 +62,6 @@ public class PlayerHealth : MonoBehaviour
 			_currentHealth = Mathf.Min(100, _currentHealth + 20);
 			Destroy(collision.gameObject);
 			MineManager.instance.SpawnNewPotion();
-		}
-
-		else if (collision.CompareTag("Enemy"))
-		{
-			_currentHealth = Mathf.Max(0, _currentHealth - 10);
 		}
 	}
 

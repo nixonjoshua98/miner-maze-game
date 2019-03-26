@@ -3,6 +3,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+ * ADD ANIMATION COLLDIERS TO ENEMY AND MOVE ATTACK ANIMATION TO IT
+ */
+
 public class EnemyMovement : MonoBehaviour
 {
 	/* - - - - INSPECTOR GAMEOBJECTS - - - - */
@@ -10,8 +15,12 @@ public class EnemyMovement : MonoBehaviour
 	private SpriteRenderer sRenderer;
 
 
-	/* - - - - INSPECTOR PRIVATES - - - - */
-	[SerializeField, Range(0.5f, 5.0f)]
+    [SerializeField]
+    private Animator anim;
+
+
+    /* - - - - INSPECTOR PRIVATES - - - - */
+    [SerializeField, Range(0.5f, 5.0f)]
 	private float speedMulti;
 
 	[SerializeField, Range(1, 10)]
@@ -24,14 +33,27 @@ public class EnemyMovement : MonoBehaviour
 	/* - - - - PRIVATES - - - - */
 	private bool isMoving = false;
 	private Vector3 moveTarget;
+    bool frozen = false;
+    float frozenTimer = 5.0f;
 
 
 	private void Update()
 	{
-		if (isMoving)
-			Move();
-		else
-			GetNewTarget();
+        if (frozen)
+        {
+            frozenTimer -= Time.deltaTime;
+            if (frozenTimer <= 0.0f)
+            {
+                sRenderer.color = Color.white;
+                frozen = false;
+            }
+        }
+
+        else if (isMoving)
+            Move();
+
+        else if (!isMoving)
+            GetNewTarget();
 	}
 
 
@@ -98,6 +120,8 @@ public class EnemyMovement : MonoBehaviour
 		{
 			RaycastHit2D hit = Physics2D.Raycast(transform.position + (dir * i), Vector3.forward, 1, LayerMask.GetMask("WallTiles", "FloorTiles", "BreakableTiles"));
 
+            if (!hit.collider) return false;
+
 			if (hit.collider.CompareTag("FloorTile"))
 			{
 				Debug.DrawLine(transform.position, transform.position + (dir * i), Color.green, 0.5f);
@@ -130,7 +154,6 @@ public class EnemyMovement : MonoBehaviour
 			{
 				playerPos = hit.collider.transform.position;
 				Debug.DrawLine(transform.position, playerPos, Color.red, 0.5f);
-				Debug.DrawLine(transform.position, transform.position + (dir * visionDistance), Color.blue, 0.5f);
 				return true;
 			}
 		}
@@ -146,4 +169,26 @@ public class EnemyMovement : MonoBehaviour
 			isMoving = false;
 		}
 	}
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!frozen && collision.CompareTag("Player"))
+        {
+            collision.GetComponent<PlayerHealth>().currentHealth -= 10;
+            anim.SetBool("EnemyAttacking", true);
+        }
+    }
+
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            anim.SetBool("EnemyAttacking", false);
+            frozenTimer = 5.0f;
+            frozen = true;
+            sRenderer.color = Color.blue;
+        }
+    }
 }

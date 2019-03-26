@@ -19,12 +19,12 @@ TagManager:
   - UI
   - 
   - 
-  - Tiles
+  - Enemies
   - Player
   - WallTiles
   - FloorTiles
   - BreakableTiles
-  - 
+  - Tiles
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1864683251
+    locked: 0
+  - name: Enemies
+    uniqueID: 3033737321
     locked: 0

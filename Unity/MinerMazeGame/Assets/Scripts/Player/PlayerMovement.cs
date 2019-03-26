@@ -116,27 +116,4 @@ public class PlayerMovement : MonoBehaviour
 		anim.SetBool("Idle", true);
 		anim.SetBool("Mining", false);
 	}
-
-
-	private void MovePlayerUsingAxis()
-	{
-		//float vert = Input.GetAxis("Vertical") * Time.deltaTime;
-		//float hori = Input.GetAxis("Horizontal") * Time.deltaTime;
-
-
-		//// Player movement direction
-		//Vector3 dir = new Vector3(hori, vert, 0);
-
-
-		//// Debugging...
-		//Debug.DrawRay(transform.position, dir.normalized, Color.green);
-
-
-		//// Flip to face direction
-		//sRenderer.flipX = (hori != 0.0f ? hori < 0.0f : sRenderer.flipX);
-
-
-		//// Move player
-		//rb.MovePosition(transform.position + (dir * speedMulti));
-	}
 }
