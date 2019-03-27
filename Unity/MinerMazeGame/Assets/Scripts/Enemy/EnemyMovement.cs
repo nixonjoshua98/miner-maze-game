@@ -4,10 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-/*
- * ADD ANIMATION COLLDIERS TO ENEMY AND MOVE ATTACK ANIMATION TO IT
- */
-
 public class EnemyMovement : MonoBehaviour
 {
 	/* - - - - INSPECTOR GAMEOBJECTS - - - - */
@@ -34,12 +30,13 @@ public class EnemyMovement : MonoBehaviour
 	private bool isMoving = false;
 	private Vector3 moveTarget;
     bool frozen = false;
+	bool isTouchingPlayer = false;
     float frozenTimer = 5.0f;
 
 
 	private void Update()
 	{
-        if (frozen)
+        if (!isTouchingPlayer && frozen)
         {
             frozenTimer -= Time.deltaTime;
             if (frozenTimer <= 0.0f)
@@ -152,8 +149,15 @@ public class EnemyMovement : MonoBehaviour
 
 			if (hit.collider && hit.collider.CompareTag("Player"))
 			{
-				playerPos = hit.collider.transform.position;
+				Vector3 hitPos = hit.collider.transform.position;
+
+				if (dir == Vector3.up || dir == Vector3.down)
+					playerPos = new Vector3(transform.position.x, hit.collider.transform.position.y, transform.position.z);
+				else if (dir == Vector3.left || dir == Vector3.right)
+					playerPos = new Vector3(hit.collider.transform.position.x, transform.position.y, transform.position.z);
+
 				Debug.DrawLine(transform.position, playerPos, Color.red, 0.5f);
+
 				return true;
 			}
 		}
@@ -177,7 +181,11 @@ public class EnemyMovement : MonoBehaviour
         {
             collision.GetComponent<PlayerHealth>().currentHealth -= 10;
             anim.SetBool("EnemyAttacking", true);
-        }
+			isTouchingPlayer = true;
+			frozenTimer = 5.0f;
+			frozen = true;
+
+		}
     }
 
 
@@ -186,9 +194,9 @@ public class EnemyMovement : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             anim.SetBool("EnemyAttacking", false);
-            frozenTimer = 5.0f;
-            frozen = true;
             sRenderer.color = Color.blue;
-        }
+			isTouchingPlayer = false;
+
+		}
     }
 }
