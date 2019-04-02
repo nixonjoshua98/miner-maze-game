@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 4288393503539107043}
   - component: {fileID: 5580662778723425017}
   - component: {fileID: 828952189280018932}
+  - component: {fileID: 1371877716076139850}
   - component: {fileID: 2821330842106735600}
   - component: {fileID: 298811012}
+  - component: {fileID: 5748142989470711948}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -150,6 +152,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.05, y: 0.05}
   m_EdgeRadius: 0
+--- !u!114 &1371877716076139850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4288393503539107044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5554d8726b08b4d4ebcb5acaeef9f5a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreTxt: {fileID: 0}
 --- !u!114 &2821330842106735600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,8 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0966c1124a4ca4a9ee6c9e2989b7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 4288393503539107043}
   sRenderer: {fileID: 4288393503539107042}
+  speedMulti: 3
 --- !u!114 &298811012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,3 +195,19 @@ MonoBehaviour:
   maxHealth: 100
   startingHealth: 55
   reduceHealthTimer: 1.25
+--- !u!114 &5748142989470711948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4288393503539107044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39801d51e8040c84eb29a6084a861fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 4288393503539107043}
+  playerMovement: {fileID: 2821330842106735600}
+  playerHealth: {fileID: 298811012}
+  playerScore: {fileID: 1371877716076139850}

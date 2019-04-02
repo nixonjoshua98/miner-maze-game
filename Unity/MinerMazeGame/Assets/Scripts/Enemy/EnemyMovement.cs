@@ -36,6 +36,10 @@ public class EnemyMovement : MonoBehaviour
 
 	private void Update()
 	{
+		if (GameManager.instance.gameState != GameManager.GameState.ACTIVE)
+			return;
+
+
         if (!isTouchingPlayer && frozen)
         {
             frozenTimer -= Time.deltaTime;
@@ -179,8 +183,9 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!frozen && collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerHealth>().currentHealth -= 10;
-            anim.SetBool("EnemyAttacking", true);
+            collision.GetComponent<PlayerHealth>().currentHealth -= 20;
+			collision.GetComponent<PlayerScore>().score -= 15;
+			anim.SetBool("EnemyAttacking", true);
 			isTouchingPlayer = true;
 			frozenTimer = 5.0f;
 			frozen = true;

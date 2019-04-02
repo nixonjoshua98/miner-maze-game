@@ -77,6 +77,7 @@ public class MineManager : MonoBehaviour
 
                     case 'E':
                         tile = Instantiate(exitTile, pos, Quaternion.identity, transform);
+						tile.name = "ExitTile";
                         break;
 					
 

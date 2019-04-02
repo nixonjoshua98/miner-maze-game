@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7924188963006959227}
   - component: {fileID: 5719257397956123045}
   - component: {fileID: 223441625481148223}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: ExitTile
   m_TagString: ExitTile
   m_Icon: {fileID: 0}

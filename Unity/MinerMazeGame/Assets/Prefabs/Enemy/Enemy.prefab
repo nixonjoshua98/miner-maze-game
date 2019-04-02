@@ -141,6 +141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sRenderer: {fileID: 6795379582791227463}
   anim: {fileID: 6795379582791227480}
-  speedMulti: 0.5
+  speedMulti: 0.75
   maxMoveDistance: 3
   visionDistance: 16
