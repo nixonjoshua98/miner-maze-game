@@ -41,7 +41,8 @@ public class PlayerMovement : MonoBehaviour
 
 	private void MovePlayer()
 	{
-		movementSound.Play();
+		if (!movementSound.isPlaying)
+			movementSound.Play();
 
 		transform.position = Vector3.MoveTowards(transform.position, moveTarget, 1.0f * Time.deltaTime * speedMulti);
 

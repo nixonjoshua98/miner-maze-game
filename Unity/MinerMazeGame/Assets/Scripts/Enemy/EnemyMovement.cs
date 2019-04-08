@@ -25,6 +25,9 @@ public class EnemyMovement : MonoBehaviour
 	[SerializeField, Range(1, 16)]
 	int visionDistance;
 
+	[SerializeField]
+	AudioSource hitSound;
+
 	
 	/* - - - - PRIVATES - - - - */
 	private bool isMoving = false;
@@ -183,7 +186,8 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!frozen && collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerHealth>().currentHealth -= 20;
+			hitSound.Play();
+			collision.GetComponent<PlayerHealth>().currentHealth -= 20;
 			collision.GetComponent<PlayerScore>().score -= 15;
 			anim.SetBool("EnemyAttacking", true);
 			isTouchingPlayer = true;

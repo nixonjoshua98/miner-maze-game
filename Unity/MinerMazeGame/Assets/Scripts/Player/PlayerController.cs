@@ -8,9 +8,11 @@ public class PlayerController : MonoBehaviour
 	[Header("Components"), SerializeField]
 	private Animator anim;
 
+	[SerializeField]
+	AudioSource itemSound;
+
 	[Header("Scripts"), SerializeField]
 	public PlayerMovement playerMovement;
-
 	public PlayerHealth playerHealth;
 	public PlayerScore playerScore;
 	public PlayerMining playerMining;
@@ -63,6 +65,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (collision.CompareTag("HealthPotion"))
 		{
+			itemSound.Play();
 			playerScore.score += 25.0f;
 			playerHealth.currentHealth += 20;
 

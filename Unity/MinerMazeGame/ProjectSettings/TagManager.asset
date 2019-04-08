@@ -10,6 +10,7 @@ TagManager:
   - ExitTile
   - Enemy
   - HealthPotion
+  - Music
   layers:
   - Default
   - TransparentFX

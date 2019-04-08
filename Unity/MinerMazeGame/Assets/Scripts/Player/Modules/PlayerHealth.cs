@@ -10,6 +10,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     Text healthText;
 
+	[SerializeField]
+	AudioSource dieSound;
+
 
     /* - - - - INSPECTOR PRIVATES - - - - */
     [SerializeField]
@@ -20,6 +23,8 @@ public class PlayerHealth : MonoBehaviour
 
 	[SerializeField, Range(0.1f, 5.0f)]
 	private float reduceHealthTimer;
+
+	bool playedDieSound = false;
 
 
     /* - - - - INTERNAL PRIVATES - - - - */
@@ -55,7 +60,13 @@ public class PlayerHealth : MonoBehaviour
         }
 
         healthText.text = currentHealth + "/" + maxHealth;
-    }
+
+		if (IsDead() && !playedDieSound)
+		{
+			playedDieSound = true;
+			dieSound.Play();
+		}
+	}
 
 	public bool IsDead()
     {
