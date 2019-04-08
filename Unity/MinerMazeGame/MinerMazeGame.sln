@@ -1,7 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{7B28696D-3509-912F-1C78-9AFD63175E7D}"
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinerMazeGame", "MinerMazeGame.csproj", "{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinerMazeGame", "MinerMazeGame.csproj", "{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinerMazeGame", "MinerMazeGame.csproj", "{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinerMazeGame.Editor", "MinerMazeGame.Editor.csproj", "{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinerMazeGame.Editor", "MinerMazeGame.Editor.csproj", "{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinerMazeGame.Editor", "MinerMazeGame.Editor.csproj", "{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +19,30 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7B28696D-3509-912F-1C78-9AFD63175E7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B28696D-3509-912F-1C78-9AFD63175E7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B28696D-3509-912F-1C78-9AFD63175E7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B28696D-3509-912F-1C78-9AFD63175E7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D5AEAC2-F593-12B5-35BB-B7F3AE10EF1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C2FEFD3-EFAF-0DF5-10E9-1B6A0CB1A3DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
