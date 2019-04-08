@@ -11,11 +11,11 @@ public class PlayerController : MonoBehaviour
 	[Header("Scripts"), SerializeField]
 	public PlayerMovement playerMovement;
 
-	[SerializeField]
 	public PlayerHealth playerHealth;
-
-	[SerializeField]
 	public PlayerScore playerScore;
+	public PlayerMining playerMining;
+
+
 
 	/* - - - - PUBLICS - - - - */
 	[HideInInspector]
@@ -23,16 +23,30 @@ public class PlayerController : MonoBehaviour
 
 	private void Update()
 	{
-		bool spaceHeld = Input.GetKey(KeyCode.Space) && GameManager.instance.gameState == GameManager.GameState.ACTIVE;
+		bool gameActive = GameManager.instance.gameState == GameManager.GameState.ACTIVE;
+		bool tryingMine = Input.GetKey(KeyCode.Space);
 
-		UpdateAnimations(spaceHeld, !spaceHeld);
-		playerMovement.Move(spaceHeld);
 
-		if (GameManager.instance.gameState == GameManager.GameState.ACTIVE)
+		UpdateAnimations(tryingMine && gameActive, !tryingMine && gameActive);
+		playerMovement.Move(tryingMine);
+
+
+
+		if (gameActive)
 		{
+			if (tryingMine && !playerMovement.isMoving)
+			{
+				playerMining.Mine();
+			}
+			else if (!playerMovement.isMoving)
+			{
+				playerMining.PlaceBlock();
+			}
+
 			playerHealth.UpdateHealth();
 			playerScore.UpdateScore();
 		}
+
 
 		//playerHealth.currentHealth = 100;
 	}

@@ -1,4 +1,4 @@
-2018.3.9f1:3.3.0.2
+2018.3.11f1:3.3.0.2
 StandaloneWindows64
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.dll
 C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.AIModule.dll

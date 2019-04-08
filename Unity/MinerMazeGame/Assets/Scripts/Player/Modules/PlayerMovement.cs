@@ -9,29 +9,28 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField]
 	private SpriteRenderer sRenderer;
 
+	[SerializeField]
+	AudioSource movementSound;
+
 	/* - - - - INSPECTOR PRIVATES - - - - */
 	[SerializeField, Range(1.0f, 10.0f)]
 	private float speedMulti;
 
-	/* - - - - PRIVATES - - - - */
-	private bool isMoving = false;
+	[HideInInspector]
+	public bool isMoving = false;
 
 	private Vector3 moveTarget;
 
 
 	public void Move(bool tryingToMine)
 	{
-		if (tryingToMine)
+		if (isMoving)
 		{
-
+			MovePlayer();
 		}
-		else if (!tryingToMine)
+		else if (!isMoving)
 		{
-			if (isMoving)
-			{
-				MovePlayer();
-			}
-			else if (!isMoving)
+			if (!tryingToMine)
 			{
 				if (GameManager.instance.gameState == GameManager.GameState.ACTIVE)
 					GetNewMovementTarget();
@@ -42,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
 
 	private void MovePlayer()
 	{
+		movementSound.Play();
+
 		transform.position = Vector3.MoveTowards(transform.position, moveTarget, 1.0f * Time.deltaTime * speedMulti);
 
 		CheckPositionToTarget();
